@@ -47,10 +47,12 @@ public class CharacterBasic : MonoBehaviour {
             //  direction (before the comma) and then we get the current velocity of this object's (the player's)  y(up and down) and
             // set it to the new velocity vector so we don't affect the up and down speed. 
             GetComponent<Rigidbody2D>().velocity = new Vector2(-runSpeed, this.GetComponent<Rigidbody2D>().velocity.y);
+            GetComponent<Transform>().localScale = new Vector3(-1, 1, 1); ;
         }
         //Repeat the above for D, the right direction. runSpeed is not negative this time
         if (Input.GetKey(KeyCode.D)) {
             GetComponent<Rigidbody2D>().velocity = new Vector2(runSpeed, this.GetComponent<Rigidbody2D>().velocity.y);
+            GetComponent<Transform>().localScale = new Vector3(1, 1, 1); ;
         }
 
         if (onGround) {
