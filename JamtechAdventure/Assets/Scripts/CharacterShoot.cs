@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CharacterBasic : MonoBehaviour {
+public class CharacterShoot : MonoBehaviour {
 
     public float runSpeed = 1.0f;
     public float jumpForce = 10.0f;
+    public int maxHealth = 10;
     public Transform groundCheckRight;
     public Transform groundCheckLeft;
 
@@ -19,7 +20,8 @@ public class CharacterBasic : MonoBehaviour {
     void Update() {
         GroundCheck();
         Move();
-        Debug.Log(Time.deltaTime.ToString())
+
+        ShootIfNeeded();
     }
 
     //Sets the ground value to see if you are able to 
@@ -55,12 +57,27 @@ public class CharacterBasic : MonoBehaviour {
         }
 
         if (onGround) {
-            if (Input.GetKeyDown(KeyCode.W)) {
+            if (Input.GetKeyDown(KeyCode.W)) { 
 
                 //To jump, we want to add force to the character's rigidbody in the y direction
                 //AddForce DOES NOT set your velocity, it adds to it, so you do not need to get the current velocity for this 
                 GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, jumpForce));
             }
+        }
+    }
+
+    void Damage(int damage) {
+        maxHealth -= damage;
+        if(maxHealth <= 0) {
+            Destroy(GetComponent<GameObject>());
+            //Game over screen
+        }
+    }
+
+
+    void ShootIfNeeded() {
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            if(Time.loopzoop)
         }
     }
 }

@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour {
 	
 	}
 
-    public void Damage() {
+    public void Damage(int damage) {
         //fill this later
     }
 }
