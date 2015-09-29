@@ -19,7 +19,6 @@ public class CharacterBasic : MonoBehaviour {
     void Update() {
         GroundCheck();
         Move();
-        Debug.Log(Time.deltaTime.ToString());
     }
 
     //Sets the ground value to see if you are able to 
@@ -55,7 +54,7 @@ public class CharacterBasic : MonoBehaviour {
         }
 
         if (onGround) {
-            if (Input.GetKeyDown(KeyCode.W)) {
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) {
 
                 //To jump, we want to add force to the character's rigidbody in the y direction
                 //AddForce DOES NOT set your velocity, it adds to it, so you do not need to get the current velocity for this 
