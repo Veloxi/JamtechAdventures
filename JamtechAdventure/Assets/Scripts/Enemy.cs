@@ -16,11 +16,11 @@ public class Enemy : MonoBehaviour {
 		
 	}
 	
-	void Damage(int damage)
+	public void Damage(int damage)
 	{
 		health-=damage;
 		if (health <= 0) {
-			DestroyObject();
+			Destroy(GetComponent<GameObject>());
 		}
 	}
 }
