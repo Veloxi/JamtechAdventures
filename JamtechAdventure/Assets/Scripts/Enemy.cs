@@ -3,9 +3,12 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
 
+<<<<<<< HEAD
 	public int health;
 	public int damageToPlayer;
 
+=======
+>>>>>>> origin/master
 	// Use this for initialization
 	void Start () {
 	
@@ -16,6 +19,7 @@ public class Enemy : MonoBehaviour {
 	
 	}
 
+<<<<<<< HEAD
 	void Damage(int damage)
 	{
 			health-=damage;
@@ -23,4 +27,9 @@ public class Enemy : MonoBehaviour {
 				DestroyObject();
 			}
 	}
+=======
+    public void Damage(int damage) {
+        //fill this later
+    }
+>>>>>>> origin/master
 }
