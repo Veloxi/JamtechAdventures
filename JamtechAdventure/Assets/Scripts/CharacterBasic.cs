@@ -7,6 +7,7 @@ public class CharacterBasic : MonoBehaviour {
     public float jumpForce = 10.0f;
     public Transform groundCheckRight;
     public Transform groundCheckLeft;
+    public Transform downCheck;
 
     public bool onGround = true;
 
@@ -19,6 +20,7 @@ public class CharacterBasic : MonoBehaviour {
     void Update() {
         GroundCheck();
         Move();
+        EnemyJumpCheck();
     }
 
     //Sets the ground value to see if you are able to 
@@ -63,5 +65,16 @@ public class CharacterBasic : MonoBehaviour {
                 GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, jumpForce));
             }
         }
+    }
+
+    void EnemyJumpCheck() {
+        LayerMask enemyLayer = (1 << 9);
+        if (Physics2D.Linecast(transform.position, downCheck.position, enemyLayer)){
+            GameObject enemy = Physics2D.Linecast(transform.position, downCheck.position, enemyLayer).collider.gameObject;
+            enemy.GetComponent<Health>().Damage(2);
+            this.GetComponent<Rigidbody2D>().velocity = new Vector2(-GetComponent<Rigidbody2D>().velocity.y, GetComponent<Rigidbody2D>().velocity.x);
+        }
+        Debug.DrawLine(this.transform.position, downCheck.position, Color.red);
+
     }
 }

@@ -26,7 +26,6 @@ public class CharacterShoot : MonoBehaviour {
                 GameObject proj;
                 proj = (GameObject)Instantiate(projectile, shootSpot.position, shootSpot.rotation);
                 proj.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed * this.GetComponent<Transform>().localScale.x, 0f);
-                //Debug.Log(this.transform.localScale.x.ToString);
                 timer = coolDown;
             }
         }
