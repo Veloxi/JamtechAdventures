@@ -48,7 +48,6 @@
      <Compile Include="Assets\Art\Animations\Temporary DoNotUse.cs" />
      <Compile Include="Assets\Art\Sprites\NewBehaviourScript.cs" />
      <Compile Include="Assets\Scripts\CharacterBasic.cs" />
-     <Compile Include="Assets\Scripts\CharacterShoot.cs" />
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\Projectile.cs" />
  <Reference Include="UnityEngine.UI">
