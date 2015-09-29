@@ -19,7 +19,7 @@ public class CharacterBasic : MonoBehaviour {
     void Update() {
         GroundCheck();
         Move();
-        Debug.Log(Time.deltaTime.ToString())
+        Debug.Log(Time.deltaTime.ToString());
     }
 
     //Sets the ground value to see if you are able to 
