@@ -7,7 +7,6 @@ public class CharacterBasic : MonoBehaviour {
     public float jumpForce = 10.0f;
     public Transform groundCheckRight;
     public Transform groundCheckLeft;
-    public Transform downCheck;
 
     public bool onGround = true;
 
@@ -29,16 +28,17 @@ public class CharacterBasic : MonoBehaviour {
         LayerMask groundLayer = (1 << 8);
         //creates two lines, from player to the set ground check positions, if they intersect with something with layer 8,
         // changes onground to true
-        if (Physics2D.Linecast(transform.position, groundCheckLeft.position, groundLayer)
-            || Physics2D.Linecast(transform.position, groundCheckRight.position, groundLayer)) {
+        if (Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, groundLayer)) {
+            //draws lines that only show up in scene view
+            Debug.DrawLine(groundCheckRight.position, groundCheckLeft.position, Color.green);
             onGround = true;
         } else {
+            //draws lines that only show up in scene view
+            Debug.DrawLine(groundCheckRight.position, groundCheckLeft.position, Color.red);
             onGround = false;
         }
 
-        //draws lines that only show up in scene view
-        Debug.DrawLine(transform.position, groundCheckLeft.position, Color.white);
-        Debug.DrawLine(transform.position, groundCheckRight.position, Color.white);
+       
     }
 
     //The basic movement functions of the character
@@ -69,12 +69,10 @@ public class CharacterBasic : MonoBehaviour {
 
     void EnemyJumpCheck() {
         LayerMask enemyLayer = (1 << 9);
-        if (Physics2D.Linecast(transform.position, downCheck.position, enemyLayer)){
-            GameObject enemy = Physics2D.Linecast(transform.position, downCheck.position, enemyLayer).collider.gameObject;
+        if (Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, enemyLayer)){
+            GameObject enemy = Physics2D.Linecast(groundCheckRight.position, groundCheckLeft.position, enemyLayer).collider.gameObject;
             enemy.GetComponent<Health>().Damage(2);
             this.GetComponent<Rigidbody2D>().velocity = new Vector2(-GetComponent<Rigidbody2D>().velocity.y, GetComponent<Rigidbody2D>().velocity.x);
         }
-        Debug.DrawLine(this.transform.position, downCheck.position, Color.red);
-
     }
 }
