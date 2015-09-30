@@ -72,7 +72,7 @@ public class CharacterBasic : MonoBehaviour {
         if (Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, enemyLayer)){
             GameObject enemy = Physics2D.Linecast(groundCheckRight.position, groundCheckLeft.position, enemyLayer).collider.gameObject;
             enemy.GetComponent<Health>().Damage(2);
-            this.GetComponent<Rigidbody2D>().velocity = new Vector2(-GetComponent<Rigidbody2D>().velocity.y, GetComponent<Rigidbody2D>().velocity.x);
+            this.GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, -GetComponent<Rigidbody2D>().velocity.y);
         }
     }
 }
