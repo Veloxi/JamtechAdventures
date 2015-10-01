@@ -68,11 +68,13 @@ public class CharacterBasic : MonoBehaviour {
     }
 
     void EnemyJumpCheck() {
-        LayerMask enemyLayer = (1 << 9);
-        if (Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, enemyLayer)){
-            GameObject enemy = Physics2D.Linecast(groundCheckRight.position, groundCheckLeft.position, enemyLayer).collider.gameObject;
-            enemy.GetComponent<Health>().Damage(2);
-            this.GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, -GetComponent<Rigidbody2D>().velocity.y);
+        LayerMask layer = (1 << 8);
+        if (Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, layer)){
+            if (Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, layer).collider.gameObject.tag == "Enemy") {
+                GameObject enemy = Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, layer).collider.gameObject;
+                enemy.GetComponent<Health>().Damage(2);
+                this.GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, -GetComponent<Rigidbody2D>().velocity.y);
+            }
         }
     }
 }
