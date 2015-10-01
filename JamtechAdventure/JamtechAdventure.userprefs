@@ -1,9 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Enemy.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\Lurk2015Testing\LurkTestBuild\Assets\Scripts\Filler.cs">
     <Files>
-      <File FileName="Assets\Scripts\CharacterBasic.cs" Line="24" Column="19" />
-      <File FileName="Assets\Scripts\Enemy.cs" Line="22" Column="2" />
+      <File FileName="..\..\Lurk2015Testing\LurkTestBuild\Assets\Scripts\Filler.cs" Line="8" Column="65" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
