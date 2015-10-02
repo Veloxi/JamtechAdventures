@@ -47,8 +47,8 @@
   <ItemGroup>
      <Compile Include="Assets\Art\Animations\Temporary DoNotUse.cs" />
      <Compile Include="Assets\Art\Sprites\NewBehaviourScript.cs" />
+     <Compile Include="Assets\Scripts\BasicEnemyWalk.cs" />
      <Compile Include="Assets\Scripts\CharacterBasic.cs" />
-     <Compile Include="Assets\Scripts\CharacterMelee.cs" />
      <Compile Include="Assets\Scripts\CharacterShoot.cs" />
      <Compile Include="Assets\Scripts\Health.cs" />
      <Compile Include="Assets\Scripts\Projectile.cs" />
