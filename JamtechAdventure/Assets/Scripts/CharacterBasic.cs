@@ -7,12 +7,12 @@ public class CharacterBasic : MonoBehaviour {
     public float jumpForce = 10.0f;
     public Transform groundCheckRight;
     public Transform groundCheckLeft;
+    public TextAsset bleh;
 
     public bool onGround = true;
 
     // Use this for initialization
     void Start() {
-
     }
 
     // Update is called once per frame
