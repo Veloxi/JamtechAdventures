@@ -43,7 +43,7 @@ public class CharacterBasic : MonoBehaviour {
     //The basic movement functions of the character
     void Move() {
         //If the key "A" is pressed,
-        if (Input.GetKey(KeyCode.A)) {
+        if (Input.GetKey(KeyCode.A) ) {
             //Then Get the rigidbody2d of this object. Set its velocity to a new 2D vector with runspeed (negative for left) in the x (or left and right)
             //  direction (before the comma) and then we get the current velocity of this object's (the player's)  y(up and down) and
             // set it to the new velocity vector so we don't affect the up and down speed. 
@@ -51,9 +51,12 @@ public class CharacterBasic : MonoBehaviour {
             GetComponent<Transform>().localScale = new Vector3(-1, 1, 1); ;
         }
         //Repeat the above for D, the right direction. runSpeed is not negative this time
-        if (Input.GetKey(KeyCode.D)) {
+        if (Input.GetKey(KeyCode.D) ) {
             GetComponent<Rigidbody2D>().velocity = new Vector2(runSpeed, this.GetComponent<Rigidbody2D>().velocity.y);
             GetComponent<Transform>().localScale = new Vector3(1, 1, 1); ;
+        }
+        if(!(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))&&onGround) {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0f, this.GetComponent<Rigidbody2D>().velocity.y);
         }
 
         if (onGround) {
