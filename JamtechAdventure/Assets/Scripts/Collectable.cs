@@ -12,9 +12,9 @@ public class Collectable : MonoBehaviour {
     }
 
 
-    void OnCollisionEnter2D(Collision2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.collider.tag == "Player")
+        if (other.tag == "Player")
         {
             pointsUI.playerPoints += 10;
         }
