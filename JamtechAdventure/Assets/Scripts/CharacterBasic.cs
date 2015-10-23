@@ -76,14 +76,18 @@ public class CharacterBasic : MonoBehaviour {
         }
     }
 
+    //This method checks whether or not an enemy is 
     void EnemyJumpCheck() {
-        LayerMask layer = (1 << 8);
-        if (Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, layer)){
-            if (Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, layer).collider.gameObject.tag == "Enemy") {
-                GameObject enemy = Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, layer).collider.gameObject;
-                enemy.GetComponent<Health>().Damage(2);
-                this.GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, -GetComponent<Rigidbody2D>().velocity.y);
-            }
+        LayerMask enemyLayer = (1 << 8); // assigns the layer you want to check for to layer 8 (which is assigned to "Enemy")
+
+        //If, within a line between groundCheckLeft and groundCheckRight, there is something within the enemyLayer (an enemy)
+        if (Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, enemyLayer)) {
+            //create an "enemy" variable
+            GameObject enemy = Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, enemyLayer).collider.gameObject;
+            //get the health component of the enemy, and damage it
+            enemy.GetComponent<Health>().Damage(2);
+            //reverse the y velocity of the player, making it bounce back up.
+            this.GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, -GetComponent<Rigidbody2D>().velocity.y);
         }
     }
 }

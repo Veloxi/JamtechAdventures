@@ -69,7 +69,10 @@ public class CharacterShoot : MonoBehaviour {
             GetComponent<Transform>().localScale = new Vector3(1, 1, 1); ;
             animator.SetInteger("AnimState", 1);
         }
+
+        //The following code checks to make sure that if you are not pressing left and right and you are on the ground
         if (!(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)) && onGround) {
+            //then you will have 0 in the x and y velocity.
             GetComponent<Rigidbody2D>().velocity = new Vector2(0f, this.GetComponent<Rigidbody2D>().velocity.y);
         }
 
@@ -83,26 +86,35 @@ public class CharacterShoot : MonoBehaviour {
         }
     }
 
+    //This method checks whether or not an enemy is 
     void EnemyJumpCheck() {
-        LayerMask layer = (1 << 8);
-        if (Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, layer)) {
-            if (Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, layer).collider.gameObject.tag == "Enemy") {
-                GameObject enemy = Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, layer).collider.gameObject;
-                enemy.GetComponent<Health>().Damage(2);
-                this.GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, -GetComponent<Rigidbody2D>().velocity.y);
-            }
+        LayerMask enemyLayer = (1 << 8); // assigns the layer you want to check for to layer 8 (which is assigned to "Enemy")
+
+        //If, within a line between groundCheckLeft and groundCheckRight, there is something within the enemyLayer (an enemy)
+        if (Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, enemyLayer)) {
+            //create an "enemy" variable
+            GameObject enemy = Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, enemyLayer).collider.gameObject;
+            //get the health component of the enemy, and damage it
+            enemy.GetComponent<Health>().Damage(2);
+            //reverse the y velocity of the player, making it bounce back up.
+            this.GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, -GetComponent<Rigidbody2D>().velocity.y);
         }
     }
+
+    //keeps track of the cooldown for shooting and shoots when you can
     void CheckForShoot() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            if(timer <= 0) {
-                animator.SetInteger("AnimState", 3);
-                GameObject proj;
-                proj = (GameObject)Instantiate(projectile, shootSpot.position, shootSpot.rotation);
-                proj.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed * this.GetComponent<Transform>().localScale.x, 0f);
-                timer = coolDown;
-            }
+        //if you press Space and the timer <= 0
+        if (Input.GetKeyDown(KeyCode.Space) && timer <= 0) {
+            //create a projectile at the shootSpot.position with the shootSpot.rotation
+            GameObject proj = (GameObject)Instantiate(projectile, shootSpot.position, shootSpot.rotation);
+            //set the projectiles speed to the the variable projectile speed multiplied by your localscale.x (for direction)
+            proj.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed * this.GetComponent<Transform>().localScale.x, 0f);
+            //sets the timer back to the cooldown (resets the timer)
+            timer = coolDown;
         }
+        // subtract the change in time since the last update from the timer
+        //this keeps track of the amount of time it has been since the last shot, 
+        //since timer is set to the cooldown on the last shot
         timer -= Time.deltaTime;
     }
 }
