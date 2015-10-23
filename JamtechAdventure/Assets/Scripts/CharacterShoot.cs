@@ -25,16 +25,16 @@ public class CharacterShoot : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        CheckForShoot();
         GroundCheck();
         Move();
         EnemyJumpCheck();
-        CheckForShoot();
     }
 
     //Sets the ground value to see if you are able to 
     void GroundCheck() {
-        //creates a layer variable and assigns it to layer 8
-        LayerMask groundLayer = (1 << 8);
+        //creates a layer variable and assigns it to layer 0
+        LayerMask groundLayer = (1 << 0);
         //creates two lines, from player to the set ground check positions, if they intersect with something with layer 8,
         // changes onground to true
         if (Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, groundLayer)) {
@@ -46,8 +46,6 @@ public class CharacterShoot : MonoBehaviour {
             Debug.DrawLine(groundCheckRight.position, groundCheckLeft.position, Color.red);
             onGround = false;
         }
-
-
     }
 
     //The basic movement functions of the character
