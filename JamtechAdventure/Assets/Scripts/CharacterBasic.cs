@@ -8,10 +8,13 @@ public class CharacterBasic : MonoBehaviour {
     public Transform groundCheckRight;
     public Transform groundCheckLeft;
 
+    private Animator animator;
+
     public bool onGround = true;
 
     // Use this for initialization
     void Start() {
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -42,6 +45,8 @@ public class CharacterBasic : MonoBehaviour {
 
     //The basic movement functions of the character
     void Move() {
+        if(GetComponent<Rigidbody2D>().velocity.x == 0)
+            animator.SetInteger("AnimState", 0);    
         //If the key "A" is pressed,
         if (Input.GetKey(KeyCode.A) ) {
             //Then Get the rigidbody2d of this object. Set its velocity to a new 2D vector with runspeed (negative for left) in the x (or left and right)
@@ -49,11 +54,13 @@ public class CharacterBasic : MonoBehaviour {
             // set it to the new velocity vector so we don't affect the up and down speed. 
             GetComponent<Rigidbody2D>().velocity = new Vector2(-runSpeed, this.GetComponent<Rigidbody2D>().velocity.y);
             GetComponent<Transform>().localScale = new Vector3(-1, 1, 1); ;
+            animator.SetInteger("AnimState", 1);
         }
         //Repeat the above for D, the right direction. runSpeed is not negative this time
         if (Input.GetKey(KeyCode.D) ) {
             GetComponent<Rigidbody2D>().velocity = new Vector2(runSpeed, this.GetComponent<Rigidbody2D>().velocity.y);
             GetComponent<Transform>().localScale = new Vector3(1, 1, 1); ;
+            animator.SetInteger("AnimState", 1);
         }
         if(!(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))&&onGround) {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0f, this.GetComponent<Rigidbody2D>().velocity.y);
