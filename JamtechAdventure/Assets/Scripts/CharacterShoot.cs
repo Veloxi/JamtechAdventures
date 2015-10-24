@@ -49,11 +49,9 @@ public class CharacterShoot : MonoBehaviour {
     }
 
     //The basic movement functions of the character
-    void Move() {
-        if (GetComponent<Rigidbody2D>().velocity.x == 0)
-            animator.SetInteger("AnimState", 0);
+    void Move() {   
         //If the key "A" is pressed,
-        if (Input.GetKey(KeyCode.A)) {
+        if (Input.GetKey(KeyCode.A)&& onGround) {
             //Then Get the rigidbody2d of this object. Set its velocity to a new 2D vector with runspeed (negative for left) in the x (or left and right)
             //  direction (before the comma) and then we get the current velocity of this object's (the player's)  y(up and down) and
             // set it to the new velocity vector so we don't affect the up and down speed. 
@@ -62,7 +60,7 @@ public class CharacterShoot : MonoBehaviour {
             animator.SetInteger("AnimState", 1);
         }
         //Repeat the above for D, the right direction. runSpeed is not negative this time
-        if (Input.GetKey(KeyCode.D)) {
+        if (Input.GetKey(KeyCode.D)&& onGround) {
             GetComponent<Rigidbody2D>().velocity = new Vector2(runSpeed, this.GetComponent<Rigidbody2D>().velocity.y);
             GetComponent<Transform>().localScale = new Vector3(1, 1, 1); ;
             animator.SetInteger("AnimState", 1);
@@ -72,6 +70,7 @@ public class CharacterShoot : MonoBehaviour {
         if (!(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)) && onGround) {
             //then you will have 0 in the x and y velocity.
             GetComponent<Rigidbody2D>().velocity = new Vector2(0f, this.GetComponent<Rigidbody2D>().velocity.y);
+            animator.SetInteger("AnimState", 0);
         }
 
         if (onGround) {
@@ -80,6 +79,7 @@ public class CharacterShoot : MonoBehaviour {
                 //To jump, we want to add force to the character's rigidbody in the y direction
                 //AddForce DOES NOT set your velocity, it adds to it, so you do not need to get the current velocity for this 
                 GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, jumpForce));
+                animator.SetInteger("AnimState", 2);    
             }
         }
     }
