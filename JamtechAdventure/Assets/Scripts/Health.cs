@@ -7,6 +7,7 @@ public class Health : MonoBehaviour {
     
     public virtual void Damage(int amount) {
         health -= amount;
+        
         if(health <= 0) {
             Destroy(this.gameObject);
         }

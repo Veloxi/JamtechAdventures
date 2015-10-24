@@ -99,7 +99,7 @@ public class CharacterShoot : MonoBehaviour {
         LayerMask enemyLayer = (1 << 8); // assigns the layer you want to check for to layer 8 (which is assigned to "Enemy")
 
         //If, within a line between groundCheckLeft and groundCheckRight, there is something within the enemyLayer (an enemy)
-        if (Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, enemyLayer)) {
+        if (Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, enemyLayer) && this.GetComponent<Rigidbody2D>().velocity.y < 0) {
             //create an "enemy" variable
             GameObject enemy = Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, enemyLayer).collider.gameObject;
             //get the health component of the enemy, and damage it
