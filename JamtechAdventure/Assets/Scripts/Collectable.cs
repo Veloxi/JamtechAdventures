@@ -4,6 +4,7 @@ using System.Collections;
 public class Collectable : MonoBehaviour {
 
     public PointsUI pointsUI;
+    public AudioClip collect;
 
 
     void Start() {
@@ -17,6 +18,7 @@ public class Collectable : MonoBehaviour {
         if (other.tag == "Player")
         {
             pointsUI.playerPoints += 10;
+            other.gameObject.GetComponent<AudioSource>().PlayOneShot(collect, 1f); 
         }
         Destroy(this.gameObject);
     }

@@ -14,7 +14,7 @@ public class PointsUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        pointText.text = "Score: " + playerPoints.ToString();
+        pointText.text = "Score: " + playerPoints.ToString()+ "             Health: " + GetComponent<Health>().health;
 	}
     void OnGUI() {
 

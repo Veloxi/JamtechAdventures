@@ -13,14 +13,17 @@ public class CharacterShoot : MonoBehaviour {
     public float jumpForce = 10.0f;
     public Transform groundCheckRight;
     public Transform groundCheckLeft;
+    public AudioClip shootSound, jumpSound;
 
     private Animator animator;
+    private AudioSource audioSource;
 
     public bool onGround = true;
 
     // Use this for initialization
     void Start() {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -51,19 +54,23 @@ public class CharacterShoot : MonoBehaviour {
     //The basic movement functions of the character
     void Move() {   
         //If the key "A" is pressed,
-        if (Input.GetKey(KeyCode.A)&& onGround) {
+        if (Input.GetKey(KeyCode.A)) {
             //Then Get the rigidbody2d of this object. Set its velocity to a new 2D vector with runspeed (negative for left) in the x (or left and right)
             //  direction (before the comma) and then we get the current velocity of this object's (the player's)  y(up and down) and
             // set it to the new velocity vector so we don't affect the up and down speed. 
             GetComponent<Rigidbody2D>().velocity = new Vector2(-runSpeed, this.GetComponent<Rigidbody2D>().velocity.y);
             GetComponent<Transform>().localScale = new Vector3(-1, 1, 1); ;
-            animator.SetInteger("AnimState", 1);
+            if (onGround) {
+                animator.SetInteger("AnimState", 1);
+            }
         }
         //Repeat the above for D, the right direction. runSpeed is not negative this time
-        if (Input.GetKey(KeyCode.D)&& onGround) {
+        if (Input.GetKey(KeyCode.D)) {
             GetComponent<Rigidbody2D>().velocity = new Vector2(runSpeed, this.GetComponent<Rigidbody2D>().velocity.y);
             GetComponent<Transform>().localScale = new Vector3(1, 1, 1); ;
-            animator.SetInteger("AnimState", 1);
+            if (onGround) {
+                animator.SetInteger("AnimState", 1);
+            }
         }
 
         //The following code checks to make sure that if you are not pressing left and right and you are on the ground
@@ -79,7 +86,10 @@ public class CharacterShoot : MonoBehaviour {
                 //To jump, we want to add force to the character's rigidbody in the y direction
                 //AddForce DOES NOT set your velocity, it adds to it, so you do not need to get the current velocity for this 
                 GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, jumpForce));
-                animator.SetInteger("AnimState", 2);    
+                animator.SetInteger("AnimState", 2); 
+   
+                //plays the Characters set jump sound
+                audioSource.PlayOneShot(jumpSound);
             }
         }
     }
@@ -107,6 +117,8 @@ public class CharacterShoot : MonoBehaviour {
             GameObject proj = (GameObject)Instantiate(projectile, shootSpot.position, shootSpot.rotation);
             //set the projectiles speed to the the variable projectile speed multiplied by your localscale.x (for direction)
             proj.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed * this.GetComponent<Transform>().localScale.x, 0f);
+            //play the shoot sound
+            audioSource.PlayOneShot(shootSound);
             //sets the timer back to the cooldown (resets the timer)
             timer = coolDown;
         }
