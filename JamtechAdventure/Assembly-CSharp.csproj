@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\Player\CameraScript.cs" />
      <Compile Include="Assets\Scripts\Player\CharacterMelee.cs" />
      <Compile Include="Assets\Scripts\Player\CharacterShoot.cs" />
+     <Compile Include="Assets\Scripts\Player\EnablePauseMenu.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerHealth.cs" />
      <Compile Include="Assets\Scripts\Player\PointsUI.cs" />
      <Compile Include="Assets\Scripts\Player\Projectile.cs" />
