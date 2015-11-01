@@ -36,6 +36,8 @@ public class CharacterShoot : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        //ensures that the timescale of the game is set to 1
+        Time.timeScale = 1f;
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
     }
