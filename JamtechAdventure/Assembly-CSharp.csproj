@@ -45,22 +45,22 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Art\Animations\Temporary DoNotUse.cs" />
      <Compile Include="Assets\Art\Sprites\NewBehaviourScript.cs" />
-     <Compile Include="Assets\Scripts\BasicEnemyWalk.cs" />
-     <Compile Include="Assets\Scripts\CameraScript.cs" />
-     <Compile Include="Assets\Scripts\CharacterMelee.cs" />
-     <Compile Include="Assets\Scripts\CharacterShoot.cs" />
-     <Compile Include="Assets\Scripts\Collectable.cs" />
-     <Compile Include="Assets\Scripts\DamagesPlayer.cs" />
-     <Compile Include="Assets\Scripts\DeathScript.cs" />
-     <Compile Include="Assets\Scripts\ExitButton.cs" />
-     <Compile Include="Assets\Scripts\Health.cs" />
-     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
-     <Compile Include="Assets\Scripts\PointsUI.cs" />
-     <Compile Include="Assets\Scripts\Projectile.cs" />
-     <Compile Include="Assets\Scripts\StartOverButton.cs" />
-     <Compile Include="Assets\Scripts\nextStage.cs" />
+     <Compile Include="Assets\Scripts\AgainstPlayer\BasicEnemyWalk.cs" />
+     <Compile Include="Assets\Scripts\AgainstPlayer\DamagesPlayer.cs" />
+     <Compile Include="Assets\Scripts\AgainstPlayer\DeathScript.cs" />
+     <Compile Include="Assets\Scripts\AgainstPlayer\Health.cs" />
+     <Compile Include="Assets\Scripts\Environment\Collectable.cs" />
+     <Compile Include="Assets\Scripts\Environment\ReverseGravity.cs" />
+     <Compile Include="Assets\Scripts\Player\CameraScript.cs" />
+     <Compile Include="Assets\Scripts\Player\CharacterMelee.cs" />
+     <Compile Include="Assets\Scripts\Player\CharacterShoot.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerHealth.cs" />
+     <Compile Include="Assets\Scripts\Player\PointsUI.cs" />
+     <Compile Include="Assets\Scripts\Player\Projectile.cs" />
+     <Compile Include="Assets\Scripts\Utilities\ExitButton.cs" />
+     <Compile Include="Assets\Scripts\Utilities\StartOverButton.cs" />
+     <Compile Include="Assets\Scripts\Utilities\nextStage.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

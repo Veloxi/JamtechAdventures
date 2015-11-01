@@ -4,7 +4,7 @@ using System.Collections;
 //this is a Health bar specific to the player. it extends "Health"
 public class PlayerHealth : Health { 
     //extending health means that all of the methods and variables inside of Health
-    // can be called within this method, and anything that gets the "Health" component
+    // can be called within this class, and anything that gets the "Health" component
     // of the player will point to this script as well
 
     // public reference to the sound the player makes when damaged
