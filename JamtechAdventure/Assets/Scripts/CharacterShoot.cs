@@ -3,22 +3,36 @@ using System.Collections;
 
 public class CharacterShoot : MonoBehaviour {
 
+    //cooldown for the shoot
     public float coolDown = 0.5f;
+    //speed of the projectile that you shoot
     public float projectileSpeed = 1f;
+    //timer used for ensuring cooldown
     private float timer = 0f;
 
+    //a spot from which you shoot, can be set with an empty game object
     public Transform shootSpot;
+    //a reference to the projectile that you are supposed to shoot
     public GameObject projectile;
+    //the players run speed
     public float runSpeed = 1.0f;
+    //the upward force added to your jump
     public float jumpForce = 10.0f;
+    // the bottom right point used for checking if there is ground below you
     public Transform groundCheckRight;
+    //the bottom left point used for ground check
     public Transform groundCheckLeft;
+    //the audio clips that the player uses, jump and shoot
     public AudioClip shootSound, jumpSound;
 
+    //declares the animator
     private Animator animator;
+    //declares the audioSource
     private AudioSource audioSource;
 
-    public bool onGround = true;
+    //a boolean (true or false) value that is set by the GroundCheck
+    // it must be true for you to be able to jump
+    private bool onGround = true;
 
     // Use this for initialization
     void Start() {
@@ -28,6 +42,7 @@ public class CharacterShoot : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        //these methods are defined down below
         CheckForShoot();
         GroundCheck();
         Move();
@@ -38,7 +53,7 @@ public class CharacterShoot : MonoBehaviour {
     void GroundCheck() {
         //creates a layer variable and assigns it to layer 0
         LayerMask groundLayer = (1 << 0);
-        //creates two lines, from player to the set ground check positions, if they intersect with something with layer 8,
+        //creates two lines, from player to the set ground check positions, if they intersect with something in layer 0,
         // changes onground to true
         if (Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, groundLayer)) {
             //draws lines that only show up in scene view
@@ -59,6 +74,7 @@ public class CharacterShoot : MonoBehaviour {
             //  direction (before the comma) and then we get the current velocity of this object's (the player's)  y(up and down) and
             // set it to the new velocity vector so we don't affect the up and down speed. 
             GetComponent<Rigidbody2D>().velocity = new Vector2(-runSpeed, this.GetComponent<Rigidbody2D>().velocity.y);
+            //flips the player to the left
             GetComponent<Transform>().localScale = new Vector3(-1, 1, 1); ;
             if (onGround) {
                 animator.SetInteger("AnimState", 1);
@@ -67,6 +83,7 @@ public class CharacterShoot : MonoBehaviour {
         //Repeat the above for D, the right direction. runSpeed is not negative this time
         if (Input.GetKey(KeyCode.D)) {
             GetComponent<Rigidbody2D>().velocity = new Vector2(runSpeed, this.GetComponent<Rigidbody2D>().velocity.y);
+            //flips the player to the right
             GetComponent<Transform>().localScale = new Vector3(1, 1, 1); ;
             if (onGround) {
                 animator.SetInteger("AnimState", 1);
@@ -98,8 +115,8 @@ public class CharacterShoot : MonoBehaviour {
     void EnemyJumpCheck() {
         LayerMask enemyLayer = (1 << 8); // assigns the layer you want to check for to layer 8 (which is assigned to "Enemy")
 
-        //If, within a line between groundCheckLeft and groundCheckRight, there is something within the enemyLayer (an enemy)
-        if (Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, enemyLayer) && this.GetComponent<Rigidbody2D>().velocity.y < 0) {
+        //If, within a line between groundCheckLeft and groundCheckRight, there is something within the enemyLayer (an enemy)... also checks to make sure you are falling
+        if (Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, enemyLayer) && this.GetComponent<Rigidbody2D>() .velocity.y < 0) {
             //create an "enemy" variable
             GameObject enemy = Physics2D.Linecast(groundCheckLeft.position, groundCheckRight.position, enemyLayer).collider.gameObject;
             //get the health component of the enemy, and damage it

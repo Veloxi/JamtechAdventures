@@ -49,7 +49,6 @@
      <Compile Include="Assets\Art\Sprites\NewBehaviourScript.cs" />
      <Compile Include="Assets\Scripts\BasicEnemyWalk.cs" />
      <Compile Include="Assets\Scripts\CameraScript.cs" />
-     <Compile Include="Assets\Scripts\CharacterBasic.cs" />
      <Compile Include="Assets\Scripts\CharacterMelee.cs" />
      <Compile Include="Assets\Scripts\CharacterShoot.cs" />
      <Compile Include="Assets\Scripts\Collectable.cs" />
