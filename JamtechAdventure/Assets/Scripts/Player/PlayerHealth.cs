@@ -17,7 +17,7 @@ public class PlayerHealth : Health {
         health -= amount;
         if (health <= 0) {
             //if the players health gets to zero, load the death scene
-            Application.LoadLevel(3);
+            Application.LoadLevel(4);
         }
         //adds the sound whenever the player is damaged
         GetComponent<AudioSource>().PlayOneShot(playerDamaged);
